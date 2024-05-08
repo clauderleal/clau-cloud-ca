@@ -1,0 +1,48 @@
+workflows:
+  version: 2
+  build:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - main
+      - deploy:
+          filters:
+            branches:
+              only:
+                - main
+          requires:
+            - build
+
+
+orbs:
+  ruby: circleci/ruby@1.4.0
+
+jobs:
+  build:
+    working_directory: ~/clau-cloud-ca
+    docker:
+      - image: cimg/ruby:3.1.0
+    steps:
+      - checkout
+      - setup_remote_docker
+      - run:
+          name: docker-login
+          command: docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+      - run:
+          name: build-docker-image
+          command: docker build -t $IMAGE_NAME:latest -f backend/Dockerfile backend/ --build-arg SECRET_KEY_BASE=$SECRET_KEY_BASE --build-arg SERVER=$"SERVER" --build-arg PRIVATE_KEY=$"PRIVATE_KEY"
+      - run:
+          name: publish-docker-image
+          command: docker push $IMAGE_NAME
+      - run:
+          name: run-docker-image
+          command: docker run -p 3001:3001 -d $IMAGE_NAME
+  deploy:
+    docker:
+      - image: cimg/ruby:3.1.0
+    steps:
+      - run:
+          name: deploy-application
+          command: ssh -o StrictHostKeyChecking=no $EC2_USERNAME@$EC2_PUBLIC_DNS "export CONTAINER_NAME=\"$CONTAINER_NAME\"; export IMAGE_NAME=\"$IMAGE_NAME\"; export SECRET_KEY_BASE=\"$SECRET_KEY_BASE\"; export PRIVATE_KEY=\"$PRIVATE_KEY\"; export SERVER=\"$SERVER\"; rm -rf clau-cloud-ca/; git clone https://github.com/clauderleal/clau-cloud-ca.git; source clau-cloud-ca/deploy.sh"
