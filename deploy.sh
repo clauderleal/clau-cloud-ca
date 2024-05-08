@@ -21,7 +21,7 @@ fi
 echo "$PRIVATE_KEY" > privatekey.pem
 echo "$SERVER" > server.crt
 
-sudo docker run -p 3001:3001 -d --name $CONTAINER_NAME \
+sudo docker run -p 3000:3000 -d --name $CONTAINER_NAME \
     --network host \
     -v /home/ubuntu/privatekey.pem:/rails/config/ssl/privatekey.pem \
     -v /home/ubuntu/server.crt:/rails/config/ssl/server.crt \

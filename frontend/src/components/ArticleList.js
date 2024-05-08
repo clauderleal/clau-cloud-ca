@@ -16,7 +16,7 @@ function Article() {
   }, []);
 
   const fetchArticles = () => {
-    axios.get("http://localhost:4000/articles", {
+    axios.get("http://54.160.193.20:3000/articles", {
       headers: { Accept: "application/json" }
     })
     .then(response => {
