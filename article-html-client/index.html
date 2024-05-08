@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Articles HTML Client</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="./script.js" defer></script>
+</head>
+<body>
+    <h1>Articles NCI</h1>
+
+    <button id="get-btn">All Articles</button>
+    <button id="get-published-btn">Articles published</button>
+    <button id="get-notpublished-btn">Articles NOT published</button>
+
+    <form id="post-form">
+        <label for="post-title-input">Title: </label>
+        <input id="post-title-input" type="text" name="title">
+        
+        <label for="post-body-input">Body: </label>
+        <input id="post-body-input" type="text" name="body">
+        
+        <label for="post-published-input">Published: </label>
+        <input id="post-published-input" type="checkbox" name="published">
+        
+        <button id="post-btn" type="submit">Submit Article</button>
+    </form>
+
+    <form id="update-form">
+        <label for="article-id">UPDATE Article</label>
+        <label for="article-id">Article ID</label>
+        <input id="article-id" type="number">
+        
+        <label for="update-title-input">Title: </label>
+        <input id="update-title-input" type="text" name="title">
+        
+        <label for="update-body-input">Body: </label>
+        <input id="update-body-input" type="text" name="body">
+        
+        <label for="update-published-input">Published: </label>
+        <input id="update-published-input" type="checkbox" name="published">
+        
+        <button id="update-btn" type="submit">Update</button>
+    </form>
+
+    <section id="articles">
+    </section>
+</body>
+</html>
