@@ -18,11 +18,5 @@ then
     sudo docker rm $CONTAINER_NAME
 fi
 
-echo "$PRIVATE_KEY" > privatekey.pem
-echo "$SERVER" > server.crt
 
-sudo docker run -p 3000:3000 -d --name $CONTAINER_NAME \
-    --network host \
-    -v /home/ubuntu/privatekey.pem:/rails/config/ssl/privatekey.pem \
-    -v /home/ubuntu/server.crt:/rails/config/ssl/server.crt \
-    $IMAGE_NAME
+sudo docker run -p 3000:3000 -d --name $CONTAINER_NAME $IMAGE_NAME
