@@ -37,7 +37,7 @@ function Article() {
 
     if (editingArticleId) {
       // Update existing article
-      axios.put(`https://54.160.193.20:3000/articles/${editingArticleId}`, newArticle, {
+      axios.put(`http://54.160.193.20:3000/articles/${editingArticleId}`, newArticle, {
         headers: { Accept: "application/json", "Content-Type": "application/json" }
       })
       .then(response => {
@@ -54,7 +54,7 @@ function Article() {
       });
     } else {
       // Create new article
-      axios.post("https://54.160.193.20:3000/articles", newArticle, {
+      axios.post("http://54.160.193.20:3000/articles", newArticle, {
         headers: { Accept: "application/json", "Content-Type": "application/json" }
       })
       .then(response => {
@@ -75,7 +75,7 @@ function Article() {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`https://54.160.193.20:3000/articles/${id}`);
+      await axios.delete(`http://54.160.193.20:3000/articles/${id}`);
       setArticles(articles.filter(article => article.id !== id));
       console.log('Article deleted successfully');
     } catch (error) {

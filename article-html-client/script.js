@@ -10,7 +10,7 @@ postBtn.addEventListener("click", postArticle);
 const updateBtn = document.getElementById("update-btn");
 updateBtn.addEventListener("click", updateArticle);
 
-let url = "http://localhost:4000/articles";
+let url = "http://54.160.193.20:3000/articles";
 
 async function getArticles() {
     articlesDiv.textContent = "";
